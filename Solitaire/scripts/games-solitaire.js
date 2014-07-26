@@ -5,3 +5,8 @@ function log(msg) {
     }
 }
 */
+(function () {
+
+    var deck = [52];
+
+}());
