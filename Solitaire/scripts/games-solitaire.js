@@ -29,6 +29,14 @@ function log(msg) {
     }
     //lets shuffle the deck
     shuffle(deck);
+	 //Let's spread the wealth(i.e. the cards) :)
+    fillInArrays(firstColumn, deck);
+    fillInArrays(secondColumn, deck);
+    fillInArrays(thirdColumn, deck);
+    fillInArrays(fourthColumn, deck);
+    fillInArrays(fifthColumn, deck);
+    fillInArrays(sixthColumn, deck);
+    fillInArrays(seventhColumn, deck);
     console.log(deck);
 
 }());
@@ -36,4 +44,14 @@ function log(msg) {
 function shuffle(array){
     for(var j, x, i = array.length; i; j = Math.floor(Math.random() * i), x = array[--i], array[i] = array[j], array[j] = x) {}
     return array;
+}
+
+function fillInArrays (deck, arr) {
+	var n = arr.length;
+	
+	for (var i = 0; i < n; i++) {
+		var last = deck.length;
+		var card = deck.pop();
+		arr[i] = card;
+	}
 }
