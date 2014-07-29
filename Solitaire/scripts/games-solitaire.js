@@ -21,12 +21,15 @@ function log(msg) {
 	var completedSuitFour = new Array(13);
     var suits = [ '\u2663', '\u2666', '\u2665', '\u2660' ];
     var cards = "2 3 4 5 6 7 8 9 10 J D K A".split(" ");
+	var lengthCards = cards.length;
+	var lengthSuits = suits.length;
 	
-    for (var i = 0, cnt = 0; i < cards.length; i++) {
-        for (var j = 0; j < suits.length; j++, cnt++) {
+    for (var i = 0, cnt = 0; i < lengthCards; i++) {
+        for (var j = 0; j < lengthSuits; j++, cnt++) {
             deck[cnt] = cards[i] + suits[j];
         }
     }
+	
     //lets shuffle the deck
     shuffle(deck);
 	 //Let's spread the wealth(i.e. the cards) :)
@@ -50,7 +53,6 @@ function fillInArrays (deck, arr) {
 	var n = arr.length;
 	
 	for (var i = 0; i < n; i++) {
-		var last = deck.length;
 		var card = deck.pop();
 		arr[i] = card;
 	}
