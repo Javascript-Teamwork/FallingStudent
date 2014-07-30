@@ -13,6 +13,9 @@ var startLives = 6;
 var catchedAudio = new Audio('flyby.wav');
 var droppedAudio = new Audio('smashing.wav');
 
+//sound button
+var sound = true;
+var soundLabel = 'sound/on';
 
 var animate = window.requestAnimationFrame || window.webkitRequestAnimationFrame ||
     window.mozRequestAnimationFrame || window.msRequestAnimationFrame;
@@ -131,11 +134,16 @@ entity.prototype.move = function () {
     else {
         if (this.x > basketPos && this.x < basketPos + basket.width - 50) {
             gameInfo.saved++;
-            catchedAudio.play();
+            if(sound){
+
+                catchedAudio.play()
+            };
 //            music("flyby.wav");
         } else {
             loseLive();
-            droppedAudio.play();
+            if(sound){
+                droppedAudio.play()
+            }
 //            music("smashing.wav");
         }
         dY = 2;
@@ -166,8 +174,8 @@ GameInfo.prototype.render = function () {
     context.fillText('Saved: ' + this.saved, 20, 30);
     context.fillText('Lives left: ' + this.lives, 20, 60);
 
-    context.fillText('dY: ' + dY, width - 100, 20);
-    context.fillText('dX: ' + dX, width - 100, 50);
+    context.fillText(soundLabel, width - 100, 20);
+
     if (waitingInput) {
         context.font = '30px Tahoma';
         if (gameover) {
@@ -187,11 +195,32 @@ function loseLive() {
 //    waitingInput = true;
 }
 
-
 // key listeners
 window.addEventListener('keydown', function (event) {
     keysPressed[event.keyCode] = true;
 });
 window.addEventListener('keyup', function (event) {
     delete keysPressed[event.keyCode];
+});
+
+//exit button event catch
+window.addEventListener('click',function(event){
+
+    var mouse_X_Coordinates = event.x;
+    var mouse_Y_Coordinates = event.y;
+
+    var correctCor_X_Start = 707;
+    var correctCor_X_end = 800;
+    var correctCor_Y_Start = 12;
+    var correctCor_Y_end = 30;
+
+    //check for correct coordinates
+    if(mouse_X_Coordinates >= correctCor_X_Start
+        && mouse_X_Coordinates <= correctCor_X_end
+        && mouse_Y_Coordinates >= correctCor_Y_Start
+        && mouse_Y_Coordinates <= correctCor_Y_end) {
+
+        sound ? soundLabel = 'sound/off' : soundLabel = 'sound/on';
+        sound ? sound = false : sound = true;
+    }
 });
