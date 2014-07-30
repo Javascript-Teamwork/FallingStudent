@@ -10,8 +10,8 @@ var tick = 0, ticks = 0, dY = 2;
 dX = 5;
 var basketPos; //horizontal position of basket
 var startLives = 6;
-var catchedAudio = new Audio('/sounds/flyby.mp3');
-var droppedAudio = new Audio('/sounds/smashing.mp3');
+var catchedAudio = new Audio('sounds/flyby.mp3');
+var droppedAudio = new Audio('sounds/smashing.mp3');
 
 //sound button
 var sound = true;
