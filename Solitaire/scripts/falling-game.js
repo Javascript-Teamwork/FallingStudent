@@ -180,7 +180,7 @@ GameInfo.prototype.render = function () {
         context.font = '30px Tahoma';
         if (gameover) {
             init();
-            context.fillText('Game Over. Press any key to play again.', 150, 350);
+            context.fillText('Game Over. Press any key to play again.', 200, 50);
         } else {
             context.fillText('You Lost a Life. Press any key to continue.', 200, 50);
         }

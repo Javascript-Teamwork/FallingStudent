@@ -6,6 +6,12 @@ function log(msg) {
 }
 */
 (function () {
+	
+//	var canvas = document.getElementById('canvas');
+//	var board = new createjs.Stage(canvas);
+//	var imgFront = '';
+//	var imgBack = '';
+	
 
     var deck = new Array(52);
     var firstColumn = new Array(1);
@@ -40,11 +46,18 @@ function log(msg) {
     fillInArrays(sixthColumn, deck);
     fillInArrays(seventhColumn, deck);
     console.log(deck);
+	
+	
 
 }());
 
 function shuffle(array){
-    for(var j, x, i = array.length; i; j = Math.floor(Math.random() * i), x = array[--i], array[i] = array[j], array[j] = x) {}
+    for(var i = array.length; i; i--) {
+        var j = Math.floor(Math.random() * i);
+        var x = array[i-1];
+        array[i] = array[j];
+        array[j] = x;
+    }
     return array;
 }
 
