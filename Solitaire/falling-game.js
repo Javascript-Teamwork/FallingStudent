@@ -206,8 +206,8 @@ window.addEventListener('keyup', function (event) {
 //exit button event catch
 window.addEventListener('click',function(event){
 
-    var mouse_X_Coordinates = event.x;
-    var mouse_Y_Coordinates = event.y;
+    var mouse_X_Coordinates = event.clientX;
+    var mouse_Y_Coordinates = event.clientY;
 
     var correctCor_X_Start = 707;
     var correctCor_X_end = 800;
