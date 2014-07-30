@@ -10,8 +10,8 @@ var tick = 0, ticks = 0, dY = 2;
 dX = 5;
 var basketPos; //horizontal position of basket
 var startLives = 6;
-var catchedAudio = new Audio('sounds/flyby.mp3');
-var droppedAudio = new Audio('sounds/smashing.mp3');
+var catchedAudio = new Audio('/sounds/flyby.mp3');
+var droppedAudio = new Audio('/sounds/smashing.mp3');
 
 //sound button
 var sound = true;
@@ -70,7 +70,7 @@ var gameover = false;
 
 // drawing all the stuff
 var imgBack = new Image();
-imgBack.src = "images/backImg.png";
+imgBack.src = "images/softUni.png";
 var renderField = function () {
     context.drawImage(imgBack, 0, 0, width, height);
     fallingMan.render();
@@ -180,7 +180,7 @@ GameInfo.prototype.render = function () {
         context.font = '30px Tahoma';
         if (gameover) {
             init();
-            context.fillText('Game Over. Press any key to play again.', 200, 50);
+            context.fillText('Game Over. Press any key to play again.', 150, 300);
         } else {
             context.fillText('You Lost a Life. Press any key to continue.', 200, 50);
         }
