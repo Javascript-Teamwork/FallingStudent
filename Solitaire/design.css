@@ -1,0 +1,15 @@
+html{
+    height: 100%;
+}
+body {
+    text-align:center;
+    height: 100%;
+}
+canvas{
+    display:block; 
+    text-align:center;
+}
+
+div { 
+    margin: 20px auto;
+}
