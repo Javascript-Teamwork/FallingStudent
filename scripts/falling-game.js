@@ -204,15 +204,15 @@ window.addEventListener('keyup', function (event) {
 });
 
 //exit button event catch
-window.addEventListener('click',function(event){
+canvas.addEventListener('click',function(event){
 
-    var mouse_X_Coordinates = event.clientX;
-    var mouse_Y_Coordinates = event.clientY;
+    var mouse_X_Coordinates = event.clientX ;
+    var mouse_Y_Coordinates = event.clientY ;
 
-    var correctCor_X_Start = 707;
-    var correctCor_X_end = 800;
-    var correctCor_Y_Start = 12;
-    var correctCor_Y_end = 30;
+    var correctCor_X_Start = 700 + canvas.offsetLeft;
+    var correctCor_X_end = 810 + canvas.offsetLeft;
+    var correctCor_Y_Start = 0 + canvas.offsetTop;
+    var correctCor_Y_end = 30 + canvas.offsetTop;
 
     //check for correct coordinates
     if(mouse_X_Coordinates >= correctCor_X_Start
