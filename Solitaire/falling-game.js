@@ -5,14 +5,16 @@ canvas.width = width;
 canvas.height = height;
 var context = canvas.getContext('2d');
 
-var spd=20;
-var tick = 0, ticks= 0, dY = 2; dX=5;
+var spd = 20;
+var tick = 0, ticks = 0, dY = 2;
+dX = 5;
 var basketPos; //horizontal position of basket
+var startLives = 6;
 
 var animate = window.requestAnimationFrame || window.webkitRequestAnimationFrame ||
     window.mozRequestAnimationFrame || window.msRequestAnimationFrame;
 
-window.onload = function() {
+window.onload = function () {
     document.body.appendChild(canvas);
     init();
     animate(frameChange);
@@ -28,10 +30,11 @@ function init() {
 //    appleX = rnd.nextInt(700) + 30;
 //    appleY = rnd.nextInt(100) + 0;
     spd = 20;
+    startLives = 6;
 }
 
 // main loop
-var frameChange = function() {
+var frameChange = function () {
     if (!waitingInput) {
         fallingMan.move();
         basket.move();
@@ -41,7 +44,7 @@ var frameChange = function() {
             if (key != '') {
                 waitingInput = false;
                 if (gameover) {
-                    gameInfo = new GameInfo(6);
+                    gameInfo = new GameInfo(startLives);
                     gameover = false;
                 }
             }
@@ -54,7 +57,7 @@ var frameChange = function() {
 
 var fallingMan = new entity(200, 100, 54, 50);
 var basket = new safety(basketPos, 400, 200, 80);
-var gameInfo = new GameInfo(3);
+var gameInfo = new GameInfo(startLives);
 var keysPressed = {};
 var waitingInput = false;
 var gameover = false;
@@ -62,8 +65,8 @@ var gameover = false;
 // drawing all the stuff
 var imgBack = new Image();
 imgBack.src = "images/backImg.png";
-var renderField = function() {
-    context.drawImage(imgBack,0,0, width, height);
+var renderField = function () {
+    context.drawImage(imgBack, 0, 0, width, height);
     fallingMan.render();
     basket.render();
     gameInfo.render();
@@ -79,10 +82,10 @@ function safety(x, y, width, height) {
 
 var safetyImg = new Image();
 safetyImg.src = "images/tramplin.png";
-safety.prototype.render = function() {
+safety.prototype.render = function () {
     context.drawImage(safetyImg, basketPos, 520, this.width, this.height);
 };
-safety.prototype.move = function() {
+safety.prototype.move = function () {
     for (var key in keysPressed) {
         // left arrow
         if (key == '37') {
@@ -112,18 +115,18 @@ function entity(x, y, width, height) {
 }
 var man = new Image();
 man.src = "images/falling.png";
-entity.prototype.render = function() {
-    context.drawImage(man,this.x,this.y, this.width, this.height);
+entity.prototype.render = function () {
+    context.drawImage(man, this.x, this.y, this.width, this.height);
 };
 
 
-entity.prototype.move = function() {
+entity.prototype.move = function () {
     tick++;
     ticks++;
     if (this.y < height - 100)
         this.y += dY;
     else {
-        if (this.x > basketPos && this.x < basketPos + basket.width-50) {
+        if (this.x > basketPos && this.x < basketPos + basket.width - 50) {
             gameInfo.saved++;
 //            music("flyby.wav");
         } else {
@@ -131,8 +134,8 @@ entity.prototype.move = function() {
 //            music("smashing.wav");
         }
         dY = 2;
-        this.x = Math.random()*700 + 50;
-        this.y = Math.random()*100 + 0;
+        this.x = Math.random() * 700 + 50;
+        this.y = Math.random() * 100 + 0;
     }
     if (tick >= spd) {
         tick = 0;
@@ -158,8 +161,8 @@ GameInfo.prototype.render = function () {
     context.fillText('Saved: ' + this.saved, 20, 30);
     context.fillText('Lives left: ' + this.lives, 20, 60);
 
-    context.fillText('dY: ' + dY, width-100, 20);
-    context.fillText('dX: ' + dX, width-100, 50);
+    context.fillText('dY: ' + dY, width - 100, 20);
+    context.fillText('dX: ' + dX, width - 100, 50);
     if (waitingInput) {
         context.font = '30px Tahoma';
         if (gameover) {
@@ -180,11 +183,10 @@ function loseLive() {
 }
 
 
-
 // key listeners
-window.addEventListener('keydown', function(event) {
+window.addEventListener('keydown', function (event) {
     keysPressed[event.keyCode] = true;
 });
-window.addEventListener('keyup', function(event) {
+window.addEventListener('keyup', function (event) {
     delete keysPressed[event.keyCode];
 });
