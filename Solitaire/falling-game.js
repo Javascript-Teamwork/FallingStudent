@@ -10,6 +10,9 @@ var tick = 0, ticks = 0, dY = 2;
 dX = 5;
 var basketPos; //horizontal position of basket
 var startLives = 6;
+var catchedAudio = new Audio('flyby.wav');
+var droppedAudio = new Audio('smashing.wav');
+
 
 var animate = window.requestAnimationFrame || window.webkitRequestAnimationFrame ||
     window.mozRequestAnimationFrame || window.msRequestAnimationFrame;
@@ -128,9 +131,11 @@ entity.prototype.move = function () {
     else {
         if (this.x > basketPos && this.x < basketPos + basket.width - 50) {
             gameInfo.saved++;
+            catchedAudio.play();
 //            music("flyby.wav");
         } else {
             loseLive();
+            droppedAudio.play();
 //            music("smashing.wav");
         }
         dY = 2;
