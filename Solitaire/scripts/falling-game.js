@@ -61,7 +61,7 @@ var frameChange = function () {
 
 // creating objects
 
-var fallingMan = new entity(200, 100, 54, 50);
+var fallingMan = new entity(200, 100, 54, 86);
 var basket = new safety(basketPos, 400, 200, 80);
 var gameInfo = new GameInfo(startLives);
 var keysPressed = {};
@@ -120,7 +120,7 @@ function entity(x, y, width, height) {
     this.height = height;
 }
 var man = new Image();
-man.src = "images/falling.png";
+man.src = "images/fallingStudent.png";
 entity.prototype.render = function () {
     context.drawImage(man, this.x, this.y, this.width, this.height);
 };
