@@ -13,6 +13,7 @@ var startLives = 6;
 var catchedAudio = new Audio('sounds/flyby.mp3');
 var droppedAudio = new Audio('sounds/smashing.mp3');
 var fallenCount = 0; //counter for passed entities
+var nakovOn = false; //toggle between entities
 
 //sound button
 var sound = true;
@@ -21,6 +22,12 @@ var soundLabel = 'sound/on';
 var animate = window.requestAnimationFrame || window.webkitRequestAnimationFrame ||
     window.mozRequestAnimationFrame || window.msRequestAnimationFrame;
 
+//start the game
+window.onload = function () {
+    document.body.appendChild(canvas);
+    init();
+    animate(frameChange);
+};
 
 
 function init() {
@@ -37,8 +44,11 @@ function init() {
 // main loop
 var frameChange = function () {
     if (!waitingInput) {
-        fallingMan.move();
-        fallingNakov.move();
+        if (nakovOn) {
+            fallingNakov.move();
+        } else {
+            fallingMan.move();
+        }
         basket.move();
         renderField();
     } else {
@@ -60,8 +70,8 @@ var man = new Image();
 man.src = "images/fallingStudent.png";
 var nak = new Image();
 nak.src = "images/Nakov Head.png";
-var fallingMan = new entity(man, 200, 60, man.width, man.height);
-var fallingNakov = new entity(nak, 400, 80, nak.width, nak.height);
+var fallingMan = new entity(man, 200, 60, 54, 86, dY);
+var fallingNakov = new entity(nak, 400, 80, 60, 90, dY);
 
 var safetyImg = new Image();
 safetyImg.src = "images/tramplin.png";
@@ -77,8 +87,11 @@ var imgBack = new Image();
 imgBack.src = "images/softUni.png";
 var renderField = function () {
     context.drawImage(imgBack, 0, 0, width, height);
-    fallingMan.render();
-    fallingNakov.render();
+    if (nakovOn) {
+        fallingNakov.render();
+    } else {
+        fallingMan.render();
+    }
     basket.render();
     gameInfo.render();
 };
@@ -115,12 +128,13 @@ safety.prototype.move = function () {
 
 
 // entity "class"
-function entity(img, x, y, width, height) {
+function entity(img, x, y, width, height, dY) {
     this.img = img;
     this.x = x;
     this.y = y;
     this.width = width;
     this.height = height;
+    this.dY = dY;
 }
 
 entity.prototype.render = function () {
@@ -132,28 +146,39 @@ entity.prototype.move = function () {
     tick++;
     ticks++;
     if (this.y < height - 100)
-        this.y += dY;
+        this.y += this.dY;
     else {
-        fallenCount++;
         if (this.x > basketPos && this.x < basketPos + basket.width - 50) {
-            gameInfo.saved++;
+            if (nakovOn) gameInfo.lives++;
+            else gameInfo.saved++;
             if(sound){
                 catchedAudio.play()
             }
+
         } else {
             loseLive();
             if(sound){
                 droppedAudio.play()
             }
         }
-        dY = 2;
+        this.dY = 2;
         this.x = Math.random() * width - this.width+20;
         this.y = Math.random() * 30 + 0;
+
+        fallenCount++;
+        if (nakovOn) {
+            fallenCount = 1;
+            nakovOn = false;
+        }
+        if (fallenCount % 5 == 0) {
+            fallenCount=0;
+            nakovOn = true;
+        }
     }
     //speed up with time
     if (tick >= spd) {
         tick = 0;
-        dY++;
+        this.dY++;
     }
     if (ticks % 250 == 0 && spd > 1) {
         if (dX < 0)
@@ -217,9 +242,3 @@ canvas.addEventListener('click',function(event){
 
 
 
-//start the game
-window.onload = function () {
-    document.body.appendChild(canvas);
-    init();
-    animate(frameChange);
-};
