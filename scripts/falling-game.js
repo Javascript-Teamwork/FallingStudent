@@ -14,6 +14,7 @@ var catchedAudio = new Audio('sounds/flyby.mp3');
 var droppedAudio = new Audio('sounds/smashing.mp3');
 var fallenCount = 0; //counter for passed entities
 var nakovOn = false; //toggle between entities
+var nakovOccurrence = Math.random()*10+5;
 
 //sound button
 var sound = true;
@@ -39,6 +40,7 @@ function init() {
     spd = 20;
     startLives = 6;
     fallenCount = 0
+    nakovOn = false;
 }
 
 // main loop
