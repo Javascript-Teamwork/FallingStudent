@@ -25,7 +25,7 @@ var animate = window.requestAnimationFrame || window.webkitRequestAnimationFrame
 
 //start the game
 window.onload = function () {
-    document.body.appendChild(canvas);
+    document.body.insertBefore(canvas,document.body.childNodes[2]);
     init();
     animate(frameChange);
 };

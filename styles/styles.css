@@ -5,22 +5,53 @@ html, body {
     background-image: url("../images/SoftUni-Wallpaper-1600-1050.png");
 }
 
+
+#container {
+    position: relative;
+}
+
 header {
-    background-color: darkgrey;
+    background-color: #444540;
     height: 70px;
     text-align: center;
 }
 
+footer {
+    margin-top: 20px;
+    padding-top: 20px;
+    height: 70px;
+    width: 100%;
+    background-color: #444540;
+    text-align: center;
+}
+
+footer a {
+
+}
+
 a {
     display: inline-block;
+    text-decoration: none;
+    font-family: Tahoma;
+    font-size: 2rem;
+    color: #fff;
+    transition: opacity 1.5s ease 0s;
+}
+
+
+
+a:hover{
+    opacity: 0.5;
+}
+
+img:hover {
 
 }
 
 
 canvas {
+    position: relative;
     background-color: #234465;
     display: block;
     margin: 50px auto;
-    width: 800px;
-    height: 600px;
 }
