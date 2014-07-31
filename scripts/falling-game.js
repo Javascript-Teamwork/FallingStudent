@@ -14,7 +14,7 @@ var catchedAudio = new Audio('sounds/flyby.mp3');
 var droppedAudio = new Audio('sounds/smashing.mp3');
 var fallenCount = 0; //counter for passed entities
 var nakovOn = false; //toggle between entities
-var nakovOccurrence = Math.random()*10+5;
+var nakovOccurrence = Math.floor(Math.random()*10)+5;
 
 //sound button
 var sound = true;
@@ -41,6 +41,7 @@ function init() {
     startLives = 6;
     fallenCount = 0
     nakovOn = false;
+    nakovOccurrence = Math.floor(Math.random()*10)+5;
 }
 
 // main loop
@@ -164,7 +165,7 @@ entity.prototype.move = function () {
             }
         }
         this.dY = 2;
-        this.x = Math.random() * width - this.width+20;
+        this.x = 10+Math.random() * (width - 50);
         this.y = Math.random() * 30 + 0;
 
         fallenCount++;
@@ -172,9 +173,10 @@ entity.prototype.move = function () {
             fallenCount = 1;
             nakovOn = false;
         }
-        if (fallenCount % 5 == 0) {
+        if (fallenCount % nakovOccurrence == 0) {
             fallenCount=0;
             nakovOn = true;
+            nakovOccurrence = Math.floor(Math.random()*10)+5;
         }
     }
     //speed up with time
