@@ -28,7 +28,7 @@ window.onload = function () {
     document.body.insertBefore(canvas,document.body.childNodes[2]);
     init();
     animate(frameChange);
-}
+};
 
 
 function init() {
@@ -66,7 +66,7 @@ var frameChange = function () {
         }
     }
     animate(frameChange);
-}
+};
 
 // creating objects
 var man = new Image();
@@ -97,7 +97,7 @@ var renderField = function () {
     }
     basket.render();
     gameInfo.render();
-}
+};
 // Safety "class"
 function Safety(x, y, width, height) {
     this.x = x;
@@ -108,7 +108,7 @@ function Safety(x, y, width, height) {
 
 Safety.prototype.render = function () {
     context.drawImage(SafetyImg, basketPos, 520, this.width, this.height);
-}
+};
 Safety.prototype.move = function () {
     for (var key in keysPressed) {
         // left arrow
@@ -126,7 +126,7 @@ Safety.prototype.move = function () {
             }
         }
     }
-}
+};
 // ------------------------------
 
 
@@ -142,7 +142,7 @@ function Entity(img, x, y, width, height, dY) {
 
 Entity.prototype.render = function () {
     context.drawImage(this.img, this.x, this.y, this.width, this.height);
-}
+};
 
 
 Entity.prototype.move = function () {
@@ -191,7 +191,7 @@ Entity.prototype.move = function () {
             dX += 1;
         spd--;
     }
-}
+};
 
 // gameinfo "class"
 function GameInfo(lives) {
@@ -214,7 +214,7 @@ GameInfo.prototype.render = function () {
             context.fillText('You Lost a Life. Press any key to continue.', 200, 50);
         }
     }
-}
+};
 function loseLive() {
     gameInfo.lives--;
     if (gameInfo.lives <= 0) {
