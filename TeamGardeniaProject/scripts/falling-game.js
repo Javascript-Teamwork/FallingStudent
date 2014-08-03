@@ -28,7 +28,7 @@ window.onload = function () {
     document.body.insertBefore(canvas,document.body.childNodes[2]);
     init();
     animate(frameChange);
-};
+}
 
 
 function init() {
@@ -66,20 +66,20 @@ var frameChange = function () {
         }
     }
     animate(frameChange);
-};
+}
 
 // creating objects
 var man = new Image();
 man.src = "images/fallingStudent.png";
 var nak = new Image();
 nak.src = "images/Nakov Head.png";
-var fallingMan = new entity(man, 200, 60, 54, 86, dY);
-var fallingNakov = new entity(nak, 400, 80, 60, 90, dY);
+var fallingMan = new Entity(man, 200, 60, 54, 86, dY);
+var fallingNakov = new Entity(nak, 400, 80, 60, 90, dY);
 
-var safetyImg = new Image();
-safetyImg.src = "images/tramplin.png";
+var SafetyImg = new Image();
+SafetyImg.src = "images/tramplin.png";
 
-var basket = new safety(basketPos, 400, 200, 80);
+var basket = new Safety(basketPos, 400, 200, 80);
 var gameInfo = new GameInfo(startLives);
 var keysPressed = {};
 var waitingInput = false;
@@ -97,19 +97,19 @@ var renderField = function () {
     }
     basket.render();
     gameInfo.render();
-};
-// safety "class"
-function safety(x, y, width, height) {
+}
+// Safety "class"
+function Safety(x, y, width, height) {
     this.x = x;
     this.y = y;
     this.width = width;
     this.height = height;
 }
 
-safety.prototype.render = function () {
-    context.drawImage(safetyImg, basketPos, 520, this.width, this.height);
-};
-safety.prototype.move = function () {
+Safety.prototype.render = function () {
+    context.drawImage(SafetyImg, basketPos, 520, this.width, this.height);
+}
+Safety.prototype.move = function () {
     for (var key in keysPressed) {
         // left arrow
         if (key == '37') {
@@ -126,12 +126,12 @@ safety.prototype.move = function () {
             }
         }
     }
-};
+}
 // ------------------------------
 
 
-// entity "class"
-function entity(img, x, y, width, height, dY) {
+// Entity "class"
+function Entity(img, x, y, width, height, dY) {
     this.img = img;
     this.x = x;
     this.y = y;
@@ -140,12 +140,12 @@ function entity(img, x, y, width, height, dY) {
     this.dY = dY;
 }
 
-entity.prototype.render = function () {
+Entity.prototype.render = function () {
     context.drawImage(this.img, this.x, this.y, this.width, this.height);
-};
+}
 
 
-entity.prototype.move = function () {
+Entity.prototype.move = function () {
     tick++;
     ticks++;
     if (this.y < height - 100)
@@ -191,7 +191,7 @@ entity.prototype.move = function () {
             dX += 1;
         spd--;
     }
-};
+}
 
 // gameinfo "class"
 function GameInfo(lives) {
@@ -214,7 +214,7 @@ GameInfo.prototype.render = function () {
             context.fillText('You Lost a Life. Press any key to continue.', 200, 50);
         }
     }
-};
+}
 function loseLive() {
     gameInfo.lives--;
     if (gameInfo.lives <= 0) {
